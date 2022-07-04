@@ -1,0 +1,3 @@
+quote.limit:
+  request-count: 30
+  time-in-minutes: 10
