@@ -23,9 +23,10 @@ import java.util.Optional;
 @Component
 public class QuotedBeanPostProcessor implements BeanPostProcessor, Ordered {
 
-    private final Map<String, Class<?>> map = new HashMap<>();
+    protected static final String USER_IP_HEADER = "REMOTE_ADDR";
 
     private final UserQuotingService userQuotingService;
+    private final Map<String, Class<?>> map = new HashMap<>();
 
     public QuotedBeanPostProcessor(UserQuotingService userQuotingService) {
         this.userQuotingService = userQuotingService;
@@ -68,7 +69,7 @@ public class QuotedBeanPostProcessor implements BeanPostProcessor, Ordered {
 
             var remoteAddr = Optional.ofNullable( RequestContextHolder.getRequestAttributes() )
                 .map( it -> ((ServletRequestAttributes) it).getRequest() )
-                .map( it -> it.getHeader("REMOTE_ADDR") )
+                .map( it -> it.getHeader(USER_IP_HEADER) )
                 .orElseThrow();
 
             if ( userQuotingService.isQuoteEnabled(remoteAddr, beanClass.getName() + method.getName()) ) {
