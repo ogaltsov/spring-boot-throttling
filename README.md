@@ -11,4 +11,5 @@
 ## Implementation
 ![Tux, the Linux mascot](https://raw.githubusercontent.com/ogaltsov/amzscout-test-task/main/Algorithm.jpeg)
 Данные о запросах пользователя к ресурсу хранятся на временной шкале (time-series).
+
 Доступность сервиса рассчитывается с помощью алгоритма "скользящего окна"(Sliding Window Algorithm) фиксированной длины.
