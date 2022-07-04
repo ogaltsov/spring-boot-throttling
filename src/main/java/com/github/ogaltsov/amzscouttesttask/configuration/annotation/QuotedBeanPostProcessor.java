@@ -1,4 +1,4 @@
-package com.github.ogaltsov.amzscouttesttask.annotation;
+package com.github.ogaltsov.amzscouttesttask.configuration.annotation;
 
 import com.github.ogaltsov.amzscouttesttask.exception.UserRequestOutOfQuotaException;
 import com.github.ogaltsov.amzscouttesttask.component.quoting.UserQuotingService;

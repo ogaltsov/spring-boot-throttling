@@ -1,6 +1,6 @@
 package com.github.ogaltsov.amzscouttesttask.implementation;
 
-import com.github.ogaltsov.amzscouttesttask.annotation.Quoted;
+import com.github.ogaltsov.amzscouttesttask.configuration.annotation.Quoted;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
