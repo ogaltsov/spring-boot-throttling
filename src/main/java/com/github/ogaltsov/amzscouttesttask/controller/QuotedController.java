@@ -1,4 +1,4 @@
-package com.github.ogaltsov.amzscouttesttask.implementation;
+package com.github.ogaltsov.amzscouttesttask.controller;
 
 import com.github.ogaltsov.amzscouttesttask.configuration.annotation.Quoted;
 import org.springframework.http.ResponseEntity;
