@@ -1,15 +1,19 @@
 ## Throttling functionality
-- Написать spring-boot приложение, которое будет содержать 1 контроллер с одним методом, который возвращает HTTP 200 и пустое тело.
-- Написать функционал, который будет ограничивать количество запросов с одного IP адреса на этот метод в размере N штук в X минут. 
-- Если количество запросов больше, то должен возвращаться 502 код ошибки, до тех пор, пока количество обращений за заданный интервал не станет ниже N.
-- Должна быть возможность настройки этих двух параметров через конфигурационный файл
-- Сделать так, чтобы это ограничение можно было применять быстро к новым методам и не только к контроллерам, а также к методам классов сервисного слоя.
-- Реализация должна учитывать многопоточную высоконагруженную среду исполнения и потреблять как можно меньше ресурсов (!важно).
-- Также написать простой JUnit-тест, который будет эмулировать работу параллельных запросов с разных IP.
-
+<p>
+Spring Boot application that contains one controller with a single method, which returns HTTP 200 and an empty body.
+</p>
+The number of requests from a single IP address to this method is limited to N requests in X minutes(based on configuration file).
+<p>
+If the number of requests exceeds this limit, a 502 error will be returned until the number of requests in the given interval drops below N.
+<p>
+This quote restriction can be quickly applied to new methods by using @Quoted annotation.
+<p>
+The implementation supports a multi-threaded and high-load execution environment.
 
 ## Implementation
-![Tux, the Linux mascot](https://raw.githubusercontent.com/ogaltsov/amzscout-test-task/main/Algorithm.jpeg)
-Данные о запросах пользователя к ресурсу хранятся на временной шкале (time-series).
-
-Доступность сервиса рассчитывается с помощью алгоритма "скользящего окна"(Sliding Window Algorithm) фиксированной длины.
+![vis](https://raw.githubusercontent.com/ogaltsov/amzscout-test-task/main/Algorithm.jpeg)
+The users resource request is stored on a timeline (queue with timestamps).
+<p>
+Algorithm uses CircularFifoQueue, which delete oldest elements if queue reaches max capacity - so there is no need to take care about cleaning old data.
+<p>
+The user-resource quota is calculated using the fixed-length Sliding Window Algorithm.
