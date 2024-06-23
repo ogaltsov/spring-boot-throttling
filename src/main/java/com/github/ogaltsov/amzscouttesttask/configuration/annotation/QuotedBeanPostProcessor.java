@@ -72,14 +72,11 @@ public class QuotedBeanPostProcessor implements BeanPostProcessor, Ordered {
                 .map( it -> it.getHeader(USER_IP_HEADER) )
                 .orElseThrow();
 
-            if ( userQuotingService.isQuoteEnabled(remoteAddr, beanClass.getName() + method.getName()) ) {
-                return method.invoke( bean, args );
-            } else {
-                throw new UserRequestOutOfQuotaException();
-            }
-        } else {
+            userQuotingService.validateQuota(remoteAddr, beanClass.getName() + method.getName());
             return method.invoke( bean, args );
         }
+
+        return method.invoke( bean, args );
     }
 
     @Override
